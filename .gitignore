@@ -1,0 +1,9 @@
+target/
+logs/
+.settings/
+bin/hibernate/generated/
+/.gradle
+
+/build
+
+/gradle.properties

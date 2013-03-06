@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+	default-lazy-init="true">
+
+	<description>Spring公共配置 </description>
+
+	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+	<context:component-scan base-package="org.xmx0632.management">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<!-- Jpa Entity Manager 配置 -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
+		<property name="dataSource" ref="dataSource"/>
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+		<property name="packagesToScan" value="org.xmx0632.management"/>
+		<property name="jpaProperties">
+			<props>
+				<!-- 命名规则 My_NAME->MyName -->
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="net.sf.ehcache.configurationResourceName">ehcache/ehcache-hibernate-local.xml</prop>
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform">
+			<bean factory-method="getDialect" class="org.springside.modules.persistence.Hibernates">
+				<constructor-arg ref="dataSource"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Spring Data Jpa配置 -->
+ 	<jpa:repositories base-package="org.xmx0632.management"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+   
+	<!-- Jpa 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- JSR303 Validator定义 -->
+ 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	<!-- production环境 -->
+ 	<beans profile="production">
+ 		<context:property-placeholder ignore-unresolvable="true"
+			location="classpath*:/application.properties" />	
+		
+		<!-- 数据源配置, 使用DBCP数据库连接池 -->
+		<!-- 
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+		
+			<property name="maxActive" value="${dbcp.maxActive}" />
+			<property name="maxIdle" value="${dbcp.maxIdle}" />
+			<property name="defaultAutoCommit" value="false" />
+			连接Idle一个小时后超时
+			<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+			<property name="minEvictableIdleTimeMillis" value="3600000" />
+		</bean>
+		 -->
+		 
+		 <!-- 加密数据库密码:https://github.com/AlibabaTech/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter -->
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+			destroy-method="close">
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="filters" value="config,wall,stat" />
+			<property name="proxyFilters">
+		        <list>
+		            <ref bean="stat-filter" />
+		        </list>
+		    </property>
+			<property name="maxActive" value="${druid.maxActive}" />
+			<property name="initialSize" value="1" />
+			<property name="maxWait" value="60000" />
+			<property name="minIdle" value="1" />
+			<property name="timeBetweenEvictionRunsMillis" value="60000" />
+			<property name="minEvictableIdleTimeMillis" value="${druid.maxIdle}" />
+			<property name="validationQuery" value="SELECT 'x'" />
+			<property name="testWhileIdle" value="true" />
+			<property name="testOnBorrow" value="false" />
+			<property name="testOnReturn" value="false" />
+			<property name="poolPreparedStatements" value="false" />
+			<property name="connectionProperties" value="${druid.connectionProperties}" />
+			
+			<!-- 怀疑有连接泄露时才打开观察,对性能有影响 -->
+			<!-- 
+			<property name="removeAbandoned" value="true" />打开removeAbandoned功能 
+		    <property name="removeAbandonedTimeout" value="1800" />1800秒，也就是30分钟
+		    <property name="logAbandoned" value="true" />关闭abanded连接时输出错误日志
+		     -->
+		</bean>
+		
+		<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		    <property name="slowSqlMillis" value="2000" /><!-- 2 second is too slow -->
+		    <property name="logSlowSql" value="true" /><!-- 打印出查询时间比较慢(大于${slowSqlMillis})的sql -->
+		    <property name="mergeSql" value="true" /><!-- 合并只是参数不同的sql语句 -->
+		</bean>
+		
+		<!-- 数据源配置,使用应用服务器的数据库连接池 -->
+		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
+	</beans>
+	
+	<!-- local development环境 -->
+	<beans profile="development">
+		<context:property-placeholder ignore-resource-not-found="true"
+			location="classpath*:/application.properties,
+          			  classpath*:/application.development.properties" />	
+
+		<!-- DBCP连接池 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="defaultAutoCommit" value="false" />
+		</bean>
+	</beans>
+	
+	<beans profile="functional">
+		<context:property-placeholder ignore-resource-not-found="true"
+			location="classpath*:/application.properties,
+          			  classpath*:/application.functional.properties,
+          			  classpath*:/application.functional-local.properties" />	
+
+		<!-- DBCP连接池 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="defaultAutoCommit" value="false" />
+		</bean>
+
+		<!-- 初始化数据表结构 -->
+		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+			<jdbc:script location="classpath:sql/h2/schema.sql" />
+		</jdbc:initialize-database>	
+	</beans>
+	
+	<!-- unit test环境 -->
+	<beans profile="test">
+	 	<context:property-placeholder ignore-resource-not-found="true"
+			location="classpath*:/application.properties,
+          			  classpath*:/application.test.properties" />	
+	
+		<!-- 嵌入式内存中数据库 -->
+		<jdbc:embedded-database id="dataSource" type="H2">
+			<jdbc:script location="classpath:sql/h2/schema.sql" />
+			<jdbc:script location="classpath:data/import-data.sql" />
+		</jdbc:embedded-database>
+	</beans>
+</beans>

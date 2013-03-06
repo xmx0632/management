@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hibernate tools" default="generate.code" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+
+	<property name="hibernatetools-templates.path" value="./hibernatetools" />
+	<property name="generated" value="generated" />
+	<property name="classes-dir" location="../../target/classes" />
+	<property name="java-source-dir" location="../../src/main/java" />
+	<property name="jsp-source-dir" location="../../" />
+	<property name="resource-dir" location="../../src/main/resources" />
+
+	<path id="toolslib">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${classes-dir}" />
+	</path>
+
+	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="clean tmp files">
+		<echo>clean generated dir</echo>
+		<delete dir="${generated}" />
+		<mkdir dir="${generated}" />
+	</target>
+
+
+	<target name="generate.crud.code" depends="clean">
+		
+		<hibernatetool destdir="${generated}" templatepath="${hibernatetools-templates.path}/">
+			<classpath>
+				<path location="${classes-dir}" />
+			</classpath>
+
+			<jdbcconfiguration configurationfile="hibernate.cfg.xml" revengfile="hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="org.xmx0632.management.utilities.hibernatetool.MyIgnorePrefixReverseEngineeringStrategy" />
+
+			<hbmtemplate template="pojo/Pojo.ftl" filepattern="java/{package-name}/entity/{class-name}.java">
+				<property key="jdk5" value="true" />
+				<property key="ejb3" value="true" />
+			</hbmtemplate>
+
+			<!-- 生成dao/manager--> 
+			<hbmtemplate template="dao.ftl" filepattern="java/{package-name}/repository/{class-name}Dao.java" />
+			<hbmtemplate template="service.ftl" filepattern="java/{package-name}/service/{class-name}Service.java" />
+			<hbmtemplate template="controller.ftl" filepattern="java/{package-name}/web/admin/{class-name}Controller.java" />
+
+			<!-- 生成jsp--> 
+			<hbmtemplate template="list.jsp.ftl" filepattern="jsp/src/main/webapp/WEB-INF/views/admin/{class-name}List.jsp" />
+			<hbmtemplate template="form.jsp.ftl" filepattern="jsp/src/main/webapp/WEB-INF/views/admin/{class-name}Form.jsp" />
+			
+			<!-- 生成资源文件-->
+			<hbmtemplate template="message.ftl" filepattern="resource/message/message_{class-name}.properties" />
+
+			<!--根据class生成sql文件-->
+			<!--<hbm2ddl destdir="${generated}" export="true" outputfilename="sqlStatement.sql" format="true"/>-->
+		</hibernatetool>
+	</target>
+	
+	<!-- ================================================================== -->
+	<!-- rename 															-->
+	<!-- ================================================================== -->
+	<taskdef name="fileNameConverter" classname="ant.task.FileNameConverter" classpathref="toolslib" />
+	
+	<!-- ================================= 
+          target: copy files to project              
+         ================================= -->
+	
+    <target name="copy.files.to.project" depends="generate.crud.code" >
+		<copy todir="${java-source-dir}">
+			<fileset dir="${generated}/java" />
+		</copy>
+
+    	<fileNameConverter dir="${generated}/jsp/src/main/webapp/WEB-INF/views/admin" extName="jsp" />
+		<copy todir="${jsp-source-dir}">
+			<fileset dir="${generated}/jsp" />
+		</copy>
+    	
+		<copy todir="${resource-dir}">
+			<fileset dir="${generated}/resource" />
+		</copy>
+    </target>
+
+    <target name="generate.code" depends="copy.files.to.project" >
+		<antcall target="clean" />
+    </target>
+</project>
