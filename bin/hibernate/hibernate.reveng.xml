@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-reverse-engineering 
   SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 <hibernate-reverse-engineering>
-	<!-- 生成df_开头的所有表的entity -->
-	<!-- <table-filter match-schema=".*" match-name="df_.*"  package="org.xmx0632.management.entity"/> -->
+	<!-- 生成tbl_开头的所有表的entity -->
+	<!-- <table-filter match-schema=".*" match-name="tbl_.*"  package="org.xmx0632.management.entity"/> -->
 	
-	<!-- 生成df_user表的entity -->
-	<table-filter match-schema=".*" match-name="tbl_fruit_story.*"  package="org.xmx0632.management"/>
+	<!-- 生成tbl_test_dbdeploy表的entity -->
+	<table-filter match-schema=".*" match-name="tbl_test_dbdeploy"  package="org.xmx0632.management"/>
 	<table-filter match-schema=".*" match-name=".*" exclude="true"/>
 </hibernate-reverse-engineering>
