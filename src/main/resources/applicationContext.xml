@@ -155,7 +155,7 @@
 
 		<!-- 初始化数据表结构 -->
 		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-			<jdbc:script location="classpath:sql/h2/schema.sql" />
+			<jdbc:script location="classpath:sql/mysql/schema.sql" />
 		</jdbc:initialize-database>	
 	</beans>
 	
@@ -164,11 +164,22 @@
 	 	<context:property-placeholder ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
           			  classpath*:/application.test.properties" />	
+
+		<!-- DBCP连接池 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="defaultAutoCommit" value="false" />
+		</bean>
 	
 		<!-- 嵌入式内存中数据库 -->
+		<!-- 
 		<jdbc:embedded-database id="dataSource" type="H2">
 			<jdbc:script location="classpath:sql/h2/schema.sql" />
 			<jdbc:script location="classpath:data/import-data.sql" />
 		</jdbc:embedded-database>
+		 -->
 	</beans>
 </beans>
