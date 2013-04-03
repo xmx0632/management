@@ -1,3 +1,4 @@
+
 <#assign declarationName = pojo.importType(pojo.getDeclarationName())>
 <#assign entityName = declarationName?uncap_first>
 <#assign classbody>
