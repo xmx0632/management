@@ -72,8 +72,7 @@
 									<#assign annColumnAnnotation = pojo.generateAnnColumnAnnotation(field)>
 									<#assign javaTypeName = pojo.getJavaTypeName(field, jdk5)>
 									<#if javaTypeName = 'Date' >
-								<td><fmt:formatDate value="${r"$"}{${entityName}.${field.name}}"
-										pattern="yyyy年MM月dd日  HH时mm分ss秒" /></td>
+								<td><fmt:formatDate value="${r"$"}{${entityName}.${field.name}}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<#else>
 							    <td>${r"$"}{${entityName}.${field.name}}</td>
 									</#if>
