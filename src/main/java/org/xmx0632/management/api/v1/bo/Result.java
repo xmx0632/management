@@ -9,8 +9,6 @@ public class Result {
 	public static final String MSG_ERR_NOT_VALID_ID = "Not a valid Id";
 	public static final String MSG_ERR_NOT_EXIST = "Not exsit";
 	public static final String MSG_ERR_STORY_NOT_ONLINE = "Fruit story is not online";
-	public static final String MSG_ERR_NOT_VALID_TERMINAL_TYPE = "Not a valid terminal type, supported terminal type: "
-			+ TerminalType.printAllTypes();
 
 	private String msg;
 	private String value;

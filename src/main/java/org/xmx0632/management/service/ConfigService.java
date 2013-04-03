@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
-import org.xmx0632.management.api.v1.bo.TerminalType;
 import org.xmx0632.management.entity.Config;
 import org.xmx0632.management.global.ConfigConstant;
 import org.xmx0632.management.repository.ConfigDao;
@@ -96,11 +95,6 @@ public class ConfigService {
 
 	public String getByName(ConfigConstant name) {
 		Config config = configDao.findByName(name.name().toLowerCase());
-		return config.getConfigValue();
-	}
-
-	public String getByName(TerminalType name) {
-		Config config = configDao.findByName(name.toConfigName().toLowerCase());
 		return config.getConfigValue();
 	}
 

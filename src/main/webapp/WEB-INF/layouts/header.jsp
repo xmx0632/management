@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header">
 	<div id="title">
-	    <h1>美果人生<small>--管理系统</small>
+	    <h1><s:message code="common.site.title" /><small>--管理系统</small>
 		<shiro:user>
 		<div class="btn-group pull-right">
 			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -39,7 +39,7 @@
 			</a>
  
 			<!-- Be sure to leave the brand out there if you want it shown -->
-			<a class="brand" href="${ctx}/">美果人生</a>
+			<a class="brand" href="${ctx}/"><s:message code="common.site.title" /></a>
 			
 			<!-- Everything you want hidden at 940px or less, place within here -->
 			<div class="nav-collapse collapse">

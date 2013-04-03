@@ -11,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.xmx0632.management.entity.UserAccount;
-import org.xmx0632.management.service.FruitProductService;
-import org.xmx0632.management.service.FruitStoryService;
-import org.xmx0632.management.service.FruitSubcategoryService;
 import org.xmx0632.management.service.UserAccountService;
 
 /**
@@ -27,15 +24,6 @@ import org.xmx0632.management.service.UserAccountService;
 public class DashboardController {
 	private static Logger log = LoggerFactory
 			.getLogger(DashboardController.class);
-
-	@Autowired
-	private FruitProductService fruitProductService;
-
-	@Autowired
-	private FruitSubcategoryService fruitSubcategoryService;
-
-	@Autowired
-	private FruitStoryService fruitStoryService;
 
 	@Autowired
 	private UserAccountService userAccountService;
