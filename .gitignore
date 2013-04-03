@@ -7,3 +7,6 @@ bin/hibernate/generated/
 /build
 
 /gradle.properties
+
+/bin/dbdeploy/output.sql
+/bin/dbdeploy/undo.sql

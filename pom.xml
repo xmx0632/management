@@ -20,15 +20,10 @@
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
-		
-		<!--
-		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
-		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-		-->	
-			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
-			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-			<jdbc.driver.version>5.1.21</jdbc.driver.version>
+
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.21</jdbc.driver.version>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -52,7 +47,7 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<!-- SPRING basic end -->
-		
+
 		<!-- AOP -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -78,7 +73,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
 		</dependency>
-		
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -108,11 +103,11 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 		</dependency>
-		
+
 		<!-- druid -->
 		<dependency>
-		     <groupId>com.alibaba</groupId>
-		     <artifactId>druid</artifactId>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
 		</dependency>
 
 		<!-- jdbc driver -->
@@ -144,7 +139,7 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<!-- WEB end -->
-		
+
 		<!-- SECURITY begin -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -155,7 +150,7 @@
 			<artifactId>shiro-ehcache</artifactId>
 		</dependency>
 		<!-- SECURITY end -->
-		
+
 		<!-- SOAP begin -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -166,16 +161,16 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 		</dependency>
 		<!-- SOAP end -->
-		
+
 		<!-- JAX-RS begin -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 		</dependency>
 		<dependency>
-	    	<groupId>com.fasterxml.jackson.jaxrs</groupId>
-	        <artifactId>jackson-jaxrs-json-provider</artifactId>
-	    </dependency>	
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+		</dependency>
 		<!-- JAX-RS end -->
 
 		<!-- JMS begin -->
@@ -214,19 +209,19 @@
 			<artifactId>ehcache-core</artifactId>
 		</dependency>
 		<!-- CACHE end -->
-		
+
 		<!-- jolokia Restful JMX -->
 		<dependency>
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-core</artifactId>
 		</dependency>
-				
-		<!-- JSR303  BeanValidator -->
+
+		<!-- JSR303 BeanValidator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-		
+
 		<!-- JSON -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -237,16 +232,16 @@
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
 		</dependency>
 		<dependency>
-	    	<groupId>com.fasterxml.jackson.datatype</groupId>
-	        <artifactId>jackson-datatype-joda</artifactId>
-       	</dependency>
-       	
-       	<!-- fastjson -->
-		<dependency>
-		     <groupId>com.alibaba</groupId>
-		     <artifactId>fastjson</artifactId>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
 		</dependency>
-		
+
+		<!-- fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
 		<!-- XML begin -->
 		<dependency>
 			<groupId>dom4j</groupId>
@@ -257,8 +252,8 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 		</dependency>
-		<!-- XML end -->	
-		
+		<!-- XML end -->
+
 		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -280,8 +275,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-	        <artifactId>jul-to-slf4j</artifactId>
-	    </dependency>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.lazyluke</groupId>
@@ -303,8 +298,8 @@
 			<artifactId>commons-codec</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -329,6 +324,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 		</dependency>
@@ -344,7 +344,7 @@
 		</dependency>
 		<!-- OTHER TOOLS end -->
 
-		<!-- TEST begin -->		
+		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -400,7 +400,7 @@
 			<artifactId>jetty-jsp</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -436,7 +436,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<!-- test插件,设定內存 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -491,13 +491,13 @@
 					</webAppConfig>
 				</configuration>
 			</plugin>
-			
+
 			<!-- enforcer, 规则统一定义在parent -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
 			</plugin>
-			
+
 			<!-- cxf wsdl2java 插件 -->
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
@@ -512,16 +512,17 @@
 					</wsdlOptions>
 				</configuration>
 			</plugin>
-			
+
 			<!-- tomcat插件 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
-					<port>9999</port>
+					<port>8888</port>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 
@@ -561,28 +562,59 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<configuration>
 							<target>
-								<property file="src/main/resources/application.development.properties" />
+								<property
+									file="src/main/resources/application.development.properties" />
 								<property file="src/main/resources/application.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.root.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue"  encoding="${project.build.sourceEncoding}">
+								<sql driver="${jdbc.driver}" url="${jdbc.root.url}" userid="${jdbc.username}"
+									password="${jdbc.password}" onerror="continue"
+									encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/sql/mysql/create_schema.sql"/>
+									<transaction src="src/main/resources/sql/mysql/create_schema.sql" />
 								</sql>
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue"  encoding="${project.build.sourceEncoding}">
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
+									password="${jdbc.password}" onerror="continue"
+									encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/sql/mysql/schema_admin.sql"/>
-									<transaction src="src/main/resources/sql/mysql/schema_admin-init.sql"/>
-									<transaction src="src/main/resources/sql/mysql/schema.sql"/>
-									<transaction src="src/main/resources/sql/mysql/schema-init.sql"/>
+									<transaction src="src/main/resources/sql/mysql/schema_admin.sql" />
+									<transaction
+										src="src/main/resources/sql/mysql/schema_admin-init.sql" />
+									<transaction src="src/main/resources/sql/mysql/schema.sql" />
+									<transaction src="src/main/resources/sql/mysql/schema-init.sql" />
+									<transaction src="src/main/resources/sql/mysql/createSchemaVersionTable.mysql.sql" />
 								</sql>
-								<!-- 
-								<sql driver="${quartz.jdbc.driver}" url="${quartz.jdbc.url}" userid="${quartz.jdbc.username}" password="${quartz.jdbc.password}"  encoding="${project.build.sourceEncoding}"
-									src="src/main/resources/sql/mysql/quartz.sql" onerror="continue">
-									<classpath refid="maven.test.classpath" />
-								</sql>
-								 -->
 							</target>
 						</configuration>
 					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<!-- 增量升级开发环境数据库 -->
+		<profile>
+			<id>upgrade-db</id>
+			<build>
+				<plugins>
+					<!-- 升级数据库增量修改 -->
+					<plugin>
+		                <groupId>com.dbdeploy</groupId>
+		                <artifactId>maven-dbdeploy-plugin</artifactId>
+		                <version>3.0M3</version>
+		                <configuration>
+		                    <scriptdirectory>src/main/resources/sql/mysql/changes/</scriptdirectory>
+		                    <driver>com.mysql.jdbc.Driver</driver>
+		                    <url>jdbc:mysql://localhost/management?useUnicode=true&amp;characterEncoding=utf-8</url>
+		                    <userid>root</userid>
+		                    <password>12345678</password>
+		                    <dbms>mysql</dbms>
+		                </configuration>
+		                <dependencies>
+			                <dependency>
+			                    <groupId>${jdbc.driver.groupId}</groupId>
+			                    <artifactId>${jdbc.driver.artifactId}</artifactId>
+			                    <version>${jdbc.driver.version}</version>
+			                </dependency>
+		                </dependencies>
+		            </plugin>
 				</plugins>
 			</build>
 		</profile>

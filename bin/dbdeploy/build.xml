@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="dbdeploy_example" default="generate-upgrade-script">
+	<property file="../../src/main/resources/application.properties"/>
+
+    <property name="db.driver" value="${jdbc.driver}" />
+    <property name="db.url" value="${jdbc.url}" />
+	<property name="db.username" value="${jdbc.username}" />
+	<property name="db.password" value="${jdbc.password}" />
+	
+    <path id="db.classpath">
+        <fileset dir="./lib">
+        	<include name="mysql*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="dbdeploy.classpath">
+        <!-- include the dbdeploy-ant jar -->
+        <fileset dir="./lib">
+            <include name="dbdeploy-ant-*.jar"/>
+        </fileset>
+
+        <!-- the dbdeploy task also needs the database driver jar on the classpath -->
+        <path refid="db.classpath" />
+
+    </path>
+
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+
+    <target name="default" depends="clean, update-database"/>
+
+    <target name="clean" depends="drop-and-create-database, create-changelog-table"/>
+
+    <target name="create-changelog-table">
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath" >
+            <fileset file="../../scripts/createSchemaVersionTable.hsql.sql"/>
+        	<!--<fileset file="../../src/main/resources/sql/mysql/createSchemaVersionTable.mysql.sql"/>-->
+        </sql>
+    </target>
+
+    <target name="update-database" description="generate a sql upgrade script">
+
+        <!-- if you don't specify an output file, dbdeploy will apply the changes for you
+
+        you may need to specify delimiter and delimitertype for your scripts to be split properly - these
+         work the same as in the ant sql task, see http://ant.apache.org/manual/CoreTasks/sql.html
+        -->
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.username}"
+                  password="${db.password}"
+        	 	  dir="../../src/main/resources/sql/mysql/changes"
+        		  dbms="mysql"
+                />
+
+    </target>
+
+    <target name="update-database-and-apply-as-separate-step" description="generate a sql upgrade script">
+
+        <!-- use dbdeploy to generate the change script -->
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.username}"
+                  password="${db.password}"
+                  dir="../../src/main/resources/sql/mysql/changes"
+                  outputfile="./output.sql"
+                  undoOutputfile="./undo.sql"
+                  dbms="mysql"
+                />
+
+        <!-- now apply the changescript to the database -->
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" classpathref="db.classpath">
+            <fileset file="output.sql"/>
+        </sql>
+
+    </target>
+
+	
+    <target name="generate-upgrade-script" description="generate a sql upgrade script">
+
+        <!-- use dbdeploy to generate the change script -->
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.username}"
+                  password="${db.password}"
+                  dir="../../src/main/resources/sql/mysql/changes"
+                  outputfile="./output.sql"
+                  undoOutputfile="./undo.sql"
+                  dbms="mysql"
+                />
+    </target>
+	
+    <target name="dump-tables">
+        <sql driver="${db.driver}" url="${db.url}"
+             userid="${db.username}" password="${db.password}" print="true" classpathref="db.classpath">
+            select * from changelog;
+            select * from test;
+        </sql>
+    </target>
+
+    <target name="drop-and-create-database">
+        <delete dir="db"/>
+        <mkdir dir="db"/>
+    </target>
+
+</project>

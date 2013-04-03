@@ -26,7 +26,7 @@
 		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<jolokia.version>1.0.6</jolokia.version>
 		<jackson.version>2.1.2</jackson.version>
-		<slf4j.version>1.7.2</slf4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.0.9</logback.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
@@ -43,8 +43,8 @@
 		<jetty.version>7.6.8.v20121106</jetty.version>
 		<h2.version>1.3.170</h2.version>
 		<fastjson.version>1.1.26</fastjson.version>
-		<druid.version>0.2.11</druid.version>
-		
+		<druid.version>0.2.15</druid.version>
+
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
@@ -52,17 +52,13 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
-		<repository>
-			<id>nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> 
-		</repository>
-		-->
+		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repository> <id>nexus</id> <name>Team 
+			Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+			</repository> -->
 		<repository>
 			<id>central</id>
 			<name>Central Repository</name>
-			<url>http://repo.maven.apache.org/maven2</url>	
+			<url>http://repo.maven.apache.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -75,21 +71,12 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-	    </repository>
+		</repository>
 	</repositories>
 
-	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. 
-	<pluginRepositories> 
-		<pluginRepository> 
-			<id>nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> 
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	-->
+	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. <pluginRepositories> <pluginRepository> 
+		<id>nexus</id> <name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+		<snapshots> <enabled>false</enabled> </snapshots> </pluginRepository> </pluginRepositories> -->
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
@@ -145,9 +132,9 @@
 				<artifactId>spring-context-support</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			<!-- SPRING basic end -->			
+			<!-- SPRING basic end -->
 
-			<!-- AOP begin-->
+			<!-- AOP begin -->
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjrt</artifactId>
@@ -190,7 +177,7 @@
 						<artifactId>junit-dep</artifactId>
 					</exclusion>
 				</exclusions>
-        	</dependency>
+			</dependency>
 
 			<!-- mybatis -->
 			<dependency>
@@ -224,14 +211,14 @@
 				<scope>runtime</scope>
 			</dependency>
 			<dependency>
-			     <groupId>com.alibaba</groupId>
-			     <artifactId>fastjson</artifactId>
-			     <version>${fastjson.version}</version>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
 			</dependency>
 			<dependency>
-			     <groupId>com.alibaba</groupId>
-			     <artifactId>druid</artifactId>
-			     <version>${druid.version}</version>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
 			</dependency>
 			<!-- PERSISTENCE end -->
 
@@ -341,10 +328,10 @@
 				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
-	            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-	            <artifactId>jackson-jaxrs-json-provider</artifactId>
-	            <version>${jackson.version}</version>
-        	</dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
 			<!-- JAX-RS end -->
 
 			<!-- JMS begin -->
@@ -408,7 +395,7 @@
 				<artifactId>jolokia-core</artifactId>
 				<version>${jolokia.version}</version>
 			</dependency>
-			<!-- jolokia end-->
+			<!-- jolokia end -->
 
 			<!-- JSR303 Bean Validator -->
 			<dependency>
@@ -422,7 +409,7 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
@@ -454,7 +441,7 @@
 				<artifactId>jaxen</artifactId>
 				<version>1.1.4</version>
 			</dependency>
-			<!-- XML end -->			
+			<!-- XML end -->
 
 			<!-- LOGGING begin -->
 			<!-- slf4j -->
@@ -490,11 +477,11 @@
 
 			<!-- java.util.logging 实际调用slf4j -->
 			<dependency>
-        		<groupId>org.slf4j</groupId>
-        		<artifactId>jul-to-slf4j</artifactId>
-        		<version>${slf4j.version}</version>
-        		<scope>runtime</scope>
-      		</dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
 
 			<!-- log4jdbc -->
 			<dependency>
@@ -517,9 +504,9 @@
 				<version>${commons-io.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>commons-fileupload</groupId>
-			    <artifactId>commons-fileupload</artifactId>
-			    <version>${commons-fileupload.version}</version>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
@@ -564,10 +551,10 @@
 			</dependency>
 			<!-- joda for jackson -->
 			<dependency>
-	            <groupId>com.fasterxml.jackson.datatype</groupId>
-	            <artifactId>jackson-datatype-joda</artifactId>
-	            <version>${jackson.version}</version>
-        	</dependency>	
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-joda</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
 			<!-- GENERAL UTILS end -->
 
 			<!-- OTHER TOOLS begin -->
@@ -595,6 +582,12 @@
 						<artifactId>commons-logging</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpmime</artifactId>
+				<version>${httpclient.version}</version>
 			</dependency>
 
 			<!-- template engine -->
@@ -795,7 +788,7 @@
 					<version>1.7</version>
 				</plugin>
 
-        		<!-- cobertura 测试覆盖率统计插件 -->
+				<!-- cobertura 测试覆盖率统计插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>cobertura-maven-plugin</artifactId>
@@ -859,11 +852,11 @@
 							<configuration>
 								<rules>
 									<requireMavenVersion>
-                  						<version>3.0.3</version>
-                					</requireMavenVersion>
-                					<requireJavaVersion>
-                  						<version>1.6</version>
-                					</requireJavaVersion>
+										<version>3.0.3</version>
+									</requireMavenVersion>
+									<requireJavaVersion>
+										<version>1.6</version>
+									</requireJavaVersion>
 									<bannedDependencies>
 										<searchTransitive>true</searchTransitive>
 										<excludes>
@@ -896,7 +889,7 @@
 						                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
 								</content>
 							</file>
-						</additionalConfig>						
+						</additionalConfig>
 					</configuration>
 				</plugin>
 
@@ -955,7 +948,7 @@
 						<configuration>
 							<includedGroups>org.springside.modules.test.category.Smoke</includedGroups>
 						</configuration>
-					</plugin>				
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -971,7 +964,7 @@
 						<configuration>
 							<excludedGroups>org.springside.modules.test.category.UnStable</excludedGroups>
 						</configuration>
-					</plugin>				
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -987,7 +980,7 @@
 						<configuration>
 							<includedGroups>org.springside.modules.test.category.UnStable</includedGroups>
 						</configuration>
-					</plugin>				
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
