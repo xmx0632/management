@@ -6,7 +6,7 @@
 <#assign classbody>
 <html>
 <head>
-<title>${entityName}<s:message code="common.management"/></title>
+<title><s:message code="${entityName}"/><s:message code="common.management"/></title>
 
 <script>
 	$(document).ready(function() {
