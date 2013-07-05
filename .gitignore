@@ -1,4 +1,5 @@
 target/
+
 logs/
 .settings/
 bin/hibernate/generated/
@@ -10,3 +11,4 @@ bin/hibernate/generated/
 
 /bin/dbdeploy/output.sql
 /bin/dbdeploy/undo.sql
+
