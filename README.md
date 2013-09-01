@@ -59,7 +59,7 @@ http://static.springsource.org/autorepo/docs/spring-framework/current/spring-fra
 1.如果需要全部的sql,只要执行所有增量脚本,数据库里的就是最新的全部表结构
 然后用workbench导出一个表结构的sql就可以,保证只需要维护一份增量脚本
 
-2.每次对数据库的变更放在文件夹:/deliciousfruit/src/main/resources/sql/mysql/changes/
+2.每次对数据库的变更放在文件夹:/management/src/main/resources/sql/mysql/changes/
 
 [3]增量脚本命名约定,必须按顺序递增：
 001_create_table.sql
@@ -68,7 +68,7 @@ http://static.springsource.org/autorepo/docs/spring-framework/current/spring-fra
 ....
 00N_xxx.sql
 
-3.增量sql脚本书写规范参考/deliciousfruit/src/main/resources/sql/mysql/changes/001_test_dbdeploy.sql
+3.增量sql脚本书写规范参考/management/src/main/resources/sql/mysql/changes/001_test_dbdeploy.sql
 	
 	drop table if exists tbl_test_dbdeploy;
 	create table tbl_test_dbdeploy (
@@ -92,7 +92,7 @@ http://static.springsource.org/autorepo/docs/spring-framework/current/spring-fra
 
 6.合并生成某个版本之后的增量脚本
 	1.在本地数据库changelog表中指定要生成的起始版本
-	2.执行/deliciousfruit/bin/dbdeploy/generate-upgrade-script.bat
+	2.执行/management/bin/dbdeploy/generate-upgrade-script.bat
 	3.生成的output.sql就是增量升级脚本
 	4.生成的undo.sql就是增量回滚脚本
 
