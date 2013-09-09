@@ -581,6 +581,7 @@
 									<transaction src="src/main/resources/sql/mysql/schema.sql" />
 									<transaction src="src/main/resources/sql/mysql/schema-init.sql" />
 									<transaction src="src/main/resources/sql/mysql/createSchemaVersionTable.mysql.sql" />
+									<transaction src="src/main/resources/sql/mysql/create_user_and_grant_privileges.sql" />
 								</sql>
 							</target>
 						</configuration>
