@@ -59,6 +59,10 @@
 							<div class="controls">
 							<#if field.name = 'description'>
 							<textarea id="${field.name}" name="${field.name}" rows="3" class="input-large">${r"$"}{${entityName}.${field.name}}</textarea>
+							<#elseif field.name = 'password' >
+							<input type="password" id="${entityName}_${field.name}" name="${field.name}"
+									value="${r"$"}{${entityName}.${field.name}}"
+									class="input-large"/>
 							<#elseif javaTypeName = 'Date' >
 							<input type="text" id="${entityName}_${field.name}" name="${field.name}"
 									value="<fmt:formatDate value="${r"$"}{${entityName}.${field.name}}"
