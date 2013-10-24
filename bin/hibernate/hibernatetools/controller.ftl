@@ -70,9 +70,11 @@ public class ${declarationName}Controller {
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@Valid ${declarationName} new${declarationName},
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, ServletRequest request) {
 		${entityName}Service.save${declarationName}(new${declarationName});
-		redirectAttributes.addFlashAttribute("message", "创建${entityName}成功");
+		redirectAttributes.addFlashAttribute("message", 
+		messageSource.getMessage("common.create.success", new Object[]{"${entityName}"},
+						request.getLocale()));
 		return "redirect:/admin/${entityName}/";
 	}
 
@@ -85,24 +87,25 @@ public class ${declarationName}Controller {
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@${pojo.importType("javax.validation.Valid")} @${pojo.importType("org.springframework.web.bind.annotation.ModelAttribute")}("preload${declarationName}") ${declarationName} ${entityName},
-			${pojo.importType("org.springframework.web.servlet.mvc.support.RedirectAttributes")} redirectAttributes) {
+			${pojo.importType("org.springframework.web.servlet.mvc.support.RedirectAttributes")} redirectAttributes, ServletRequest request) {
 		${entityName}Service.save${declarationName}(${entityName});
-		redirectAttributes.addFlashAttribute("message","更新${entityName}成功");
+		redirectAttributes.addFlashAttribute("message", messageSource.getMessage("common.update.success", new Object[]{"${entityName}"},
+						request.getLocale()));
 		return "redirect:/admin/${entityName}";
 	}
 
 	@RequestMapping(value = "delete/{id}")
 	public String delete(@PathVariable("id") Long id,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes, ServletRequest request) {
 		${entityName}Service.delete${declarationName}(id);
-		redirectAttributes.addFlashAttribute("message", "删除${entityName}成功");
+		redirectAttributes.addFlashAttribute("message", messageSource.getMessage("common.delete.success", new Object[]{"${entityName}"},
+						request.getLocale()));
 		return "redirect:/admin/${entityName}";
 	}
 
 	/**
-	 * 使用@ModelAttribute, 实现Struts2
-	 * Preparable二次部分绑定的效果,先根据form的id从数据库查出${declarationName}对象,再把Form提交的内容绑定到该对象上.
-	 * 因为仅update()方法的form中有id属性,因此本方法在该方法中执行.
+	 * implement struts2 preparable by @ModelAttribute, 
+	 * query ${declarationName} object by id in form,bind content submited in form to the object.
 	 */
 	@ModelAttribute("preload${declarationName}")
 	public ${declarationName} get${declarationName}(
@@ -116,7 +119,7 @@ public class ${declarationName}Controller {
 </#assign>
 
 ${pojo.generateImports()}
-<#-- import對應的entity-->
+<#-- import对应的entity-->
 <#assign qualifiedDeclarationName = pojo.importType(pojo.getPackageName())>
 import ${pojo.getPackageName()}.entity.${declarationName};
 import ${pojo.getPackageName()}.service.${declarationName}Service;

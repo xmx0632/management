@@ -2,9 +2,8 @@
 <#assign entityName = declarationName?uncap_first>
 ${pojo.getPackageDeclaration()?replace(";", ".service;")}
 <#assign classbody>
-//Spring Bean的标识.
 @${pojo.importType("org.springframework.stereotype.Component")}
-// 默认将类中的所有public函数纳入事务管理.
+// all public method will be managed by transaction as default.
 @${pojo.importType("org.springframework.transaction.annotation.Transactional")}(readOnly = true)
 public class ${declarationName}Service {
 
@@ -40,7 +39,7 @@ public class ${declarationName}Service {
 	
 
 	/**
-	 * 创建分页请求.
+	 * create pagination request.
 	 */
 	private ${pojo.importType("org.springframework.data.domain.PageRequest")} buildPageRequest(int pageNumber, int pagzSize, String sortType) {
 		${pojo.importType("org.springframework.data.domain.Sort")} sort = null;
@@ -57,7 +56,7 @@ public class ${declarationName}Service {
 	}
 	
 	/**
-	 * 创建动态查询条件组合.
+	 * create dynamic query criteria.
 	 */
 	private ${pojo.importType("org.springframework.data.jpa.domain.Specification")}<${declarationName}> buildSpecification(Map<String, Object> filterParams) {
 		Map<String, ${pojo.importType("org.springside.modules.persistence.SearchFilter")}> filters = SearchFilter.parse(filterParams);

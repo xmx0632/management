@@ -22,9 +22,9 @@
 		</#if>
 		</#foreach>
 		
-		//聚焦第一个输入框
+		//focus on first input element
 		${r"$"}("#${entityName}_${firstField}").focus();
-		//为inputForm注册validate函数
+		//register validate function for inputForm
 		${r"$"}("#inputForm").validate();
 	});
 </script>

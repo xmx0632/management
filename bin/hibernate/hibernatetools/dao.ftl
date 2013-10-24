@@ -1,6 +1,6 @@
 <#assign declarationName = pojo.importType(pojo.getDeclarationName())>
 <#assign entityName = declarationName?uncap_first>
-<#-- 修改包名為:package ${配置的包名}.repository; -->
+<#-- 修改包名为:package ${配置的包名}.repository; -->
 ${pojo.getPackageDeclaration()?replace(";", ".repository;")}
 
 <#assign classbody>
@@ -11,7 +11,7 @@ public interface ${declarationName}Dao extends ${pojo.importType("org.springfram
 </#assign>
 
 ${pojo.generateImports()}
-<#-- import對應的entity-->
+<#-- import对应的entity-->
 <#assign qualifiedDeclarationName = pojo.importType(pojo.getPackageName())>
 import ${pojo.getPackageName()}.entity.${declarationName};
 ${classbody}
