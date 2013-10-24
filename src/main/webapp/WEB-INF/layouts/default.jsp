@@ -21,6 +21,9 @@
 		padding: 9px 0;
 	  }
 	</style>
+	<!-- My97DatePicker -->
+	<script language="javascript" type="text/javascript" src="${ctx}/static/My97DatePicker/WdatePicker.js"></script>
+	
 	<!-- custom js -->
 	<script src="${ctx}/static/js/util.js"></script>
 	

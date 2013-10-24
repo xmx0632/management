@@ -61,7 +61,7 @@
 							<textarea id="${field.name}" name="${field.name}" rows="3" class="input-large">${r"$"}{${entityName}.${field.name}}</textarea>
 							<#elseif javaTypeName = 'Date' >
 							<input type="text" id="${entityName}_${field.name}" name="${field.name}"
-									value="<fmt:formatDate value="${entityName}.${field.name}"
+									value="<fmt:formatDate value="${r"$"}{${entityName}.${field.name}}"
 											pattern="yyyy-MM-dd" />"  onClick="WdatePicker()"
 									class="Wdate"/>
 							<#else>
