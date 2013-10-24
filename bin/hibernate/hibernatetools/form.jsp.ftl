@@ -31,6 +31,7 @@
 </head>
 
 <body>
+	<#assign jdk5 = true>
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
@@ -50,11 +51,19 @@
 						  <#if field_index = 1>
 						  <#else>
 						  </#if>
+						  
+						<#assign javaTypeName = pojo.getJavaTypeName(field, jdk5)>
+						
 						<div class="control-group">
 							<label for="${entityName}_${field.name}" class="control-label"><s:message code="${entityName}.${field.name}"/>:</label>
 							<div class="controls">
 							<#if field.name = 'description'>
 							<textarea id="${field.name}" name="${field.name}" rows="3" class="input-large">${r"$"}{${entityName}.${field.name}}</textarea>
+							<#elseif javaTypeName = 'Date' >
+							<input type="text" id="${entityName}_${field.name}" name="${field.name}"
+									value="<fmt:formatDate value="${entityName}.${field.name}"
+											pattern="yyyy-MM-dd" />"  onClick="WdatePicker()"
+									class="Wdate"/>
 							<#else>
 							<input type="text" id="${entityName}_${field.name}" name="${field.name}"
 								value="${r"$"}{${entityName}.${field.name}}" 
