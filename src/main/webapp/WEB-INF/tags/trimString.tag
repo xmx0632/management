@@ -6,10 +6,10 @@
 
 <%
 int length = value == null?0:value.length();
-if(length < maxLength){%>
+if(length <= maxLength){%>
 	<%=value%>
 <%}else{
 	String sub = value.substring(0, maxLength);
 	%>
-	<%=sub%>...
+	<a href="#" class="no_underline_link" data-rel="popover" data-content="<%=value%>" title="<%=sub%>..."><%=sub%>...</a>
 <%} %>

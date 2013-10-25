@@ -498,3 +498,12 @@ box-shadow: 0 0 10px #BDBDBD;
 .box-content.buttons{
 min-height:297px;
 }
+
+a.no_underline_link{
+	  text-decoration:none;
+      color: #000;
+      &:hover {
+         color: #000;
+         text-decoration:underline;
+       }
+     }

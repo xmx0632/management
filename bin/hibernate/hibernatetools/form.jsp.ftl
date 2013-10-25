@@ -68,6 +68,10 @@
 									value="<fmt:formatDate value="${r"$"}{${entityName}.${field.name}}"
 											pattern="yyyy-MM-dd" />"  onClick="WdatePicker()"
 									class="Wdate"/>
+							<#elseif javaTypeName = 'BigDecimal' >
+							<div class="input-append">
+								<input type="text" id="${entityName}_${field.name}" name="${field.name}" value="${r"$"}{${entityName}.${field.name}}"/><span class="add-on">$</span>
+							</div>
 							<#else>
 							<input type="text" id="${entityName}_${field.name}" name="${field.name}"
 								value="${r"$"}{${entityName}.${field.name}}" 

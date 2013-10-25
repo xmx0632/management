@@ -74,7 +74,7 @@
 									<#if javaTypeName = 'Date' >
 								<td><fmt:formatDate value="${r"$"}{${entityName}.${field.name}}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<#else>
-							    <td><tags:trimString value="${r"$"}{${entityName}.${field.name}}" maxLength="13" /></td>
+							    <td><tags:trimString value="${r"$"}{${entityName}.${field.name}}" maxLength="11" /></td>
 									</#if>
 								  </#if>
 							  </#if>
