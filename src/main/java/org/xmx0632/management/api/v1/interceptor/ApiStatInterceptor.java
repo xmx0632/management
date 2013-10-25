@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.xmx0632.management.api.v1.helper.ApiStatHelper;
-import org.xmx0632.management.api.v1.helper.ApiStatService;
+import org.xmx0632.management.service.ApiStatService;
 
 @Component
 public class ApiStatInterceptor implements HandlerInterceptor {

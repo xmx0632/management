@@ -1,4 +1,4 @@
-package org.xmx0632.management.api.v1.helper;
+package org.xmx0632.management.service;
 
 import java.util.List;
 import java.util.Map;

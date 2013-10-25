@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.xmx0632.management.api.v1.helper.ApiStatService;
+import org.xmx0632.management.service.ApiStatService;
 
 /**
  * 系统状态信息打印

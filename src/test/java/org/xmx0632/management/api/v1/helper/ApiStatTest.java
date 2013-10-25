@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.xmx0632.management.api.v1.helper.ApiStatService;
+import org.xmx0632.management.service.ApiStatService;
 
 public class ApiStatTest {
 
