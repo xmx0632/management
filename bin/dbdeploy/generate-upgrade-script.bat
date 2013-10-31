@@ -1,5 +1,5 @@
 @echo off
-echo [INFO] Package the war in target dir.
+echo [INFO] generate upgrade batch script.
 
 call ant
 pause
