@@ -46,6 +46,12 @@
 	<logger name="jdbc.sqltiming" level="INFO" />
 	<!-- sql only -->
 	<logger name="jdbc.sqlonly" level="INFO" />
+	
+	<logger name="druid.sql" level="warn" />
+	<logger name="druid.sql.DataSource" level="warn" />
+	<logger name="druid.sql.Connection" level="warn" />
+	<logger name="druid.sql.ResultSet" level="warn" />
+	<logger name="druid.sql.Statement" level="debug" />
 
 	<logger name="org.xmx0632.management.api.v1.RequestValidationInterceptor" level="debug" />
 	<logger name="org.xmx0632.management.service.ConfigService" level="info" />

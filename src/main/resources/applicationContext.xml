@@ -85,7 +85,8 @@
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
-			<property name="filters" value="config,wall,stat" />
+			<!-- 配置slf4j打印sql参数 -->
+			<property name="filters" value="wall,stat,slf4j" />
 			<property name="proxyFilters">
 		        <list>
 		            <ref bean="stat-filter" />
