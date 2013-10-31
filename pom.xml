@@ -24,6 +24,12 @@
 		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 		<jdbc.driver.version>5.1.21</jdbc.driver.version>
+		
+		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+		<jdbc.root.url>jdbc:mysql://localhost</jdbc.root.url>
+		<jdbc.url>jdbc:mysql://localhost/management?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+		<jdbc.upgrade.userid>root</jdbc.upgrade.userid>
+		<jdbc.upgrade.password>12345678</jdbc.upgrade.password>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -562,17 +568,17 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<configuration>
 							<target>
-								<property
+								<!-- <property
 									file="src/main/resources/application.development.properties" />
-								<property file="src/main/resources/application.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.root.url}" userid="${jdbc.username}"
-									password="${jdbc.password}" onerror="continue"
+								<property file="src/main/resources/application.properties" /> -->
+								<sql driver="${jdbc.driver}" url="${jdbc.root.url}" userid="${jdbc.upgrade.userid}"
+									password="${jdbc.upgrade.password}" onerror="continue"
 									encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
 									<transaction src="src/main/resources/sql/mysql/create_schema.sql" />
 								</sql>
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
-									password="${jdbc.password}" onerror="continue"
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.upgrade.userid}"
+									password="${jdbc.upgrade.password}" onerror="continue"
 									encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
 									<transaction src="src/main/resources/sql/mysql/schema_admin.sql" />
@@ -602,10 +608,10 @@
 		                <version>3.0M3</version>
 		                <configuration>
 		                    <scriptdirectory>src/main/resources/sql/mysql/changes/</scriptdirectory>
-		                    <driver>com.mysql.jdbc.Driver</driver>
-		                    <url>jdbc:mysql://localhost/management?useUnicode=true&amp;characterEncoding=utf-8</url>
-		                    <userid>root</userid>
-		                    <password>12345678</password>
+		                    <driver>${jdbc.driver}</driver>
+		                    <url>${jdbc.url}</url>
+		                    <userid>${jdbc.upgrade.userid}</userid>
+		                    <password>${jdbc.upgrade.password}</password>
 		                    <dbms>mysql</dbms>
 		                </configuration>
 		                <dependencies>
