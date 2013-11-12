@@ -1,17 +1,54 @@
 management
 ==============
 
-management management
+quick start
+------------
+
+环境准备:安装了java1.6+,ant和maven，能联网
+
+执行bin/init_maven_repo.bat,安装springside相关jar包到本地maven仓库
+
+执行bin/package.bat,测试打包是否正常,可以自动下载依赖的jar包,并打出war即为正常.
+
+0.启动mysql服务,确保配置文件中的数据库登录信息正确
+
+   a.应用程序中的数据库配置信息：
+   /management/src/main/resources/application.properties
+
+   b.增量升级数据库脚本的数据库配置信息：
+   /management/pom.xml中properties节点下12345678修改为数据库root密码
+   <jdbc.upgrade.password>12345678</jdbc.upgrade.password>
+
+   c.代码生成器使用的数据库配置信息：
+   /management/bin/hibernate/hibernate.cfg.xml
+
+1.顺序执行bin/refresh-db.bat和bin/upgrade-db.bat,新建management数据库和对应用户
+
+2.执行bin/tomcat.bat或者bin/jetty.bat启动web服务
+
+3.访问http://localhost:8888/management
 
 
+-------------------------------------------------------------------
+						单表CRUD代码生成
+-------------------------------------------------------------------
+1.新增数据库变更脚本到目录:/management/src/main/resources/sql/mysql/changes/
+	增量脚本命名约定,必须按顺序递增：
+	001_create_table.sql
+	002_insert_data.sql
+	003_升级内容说明.sql
+	...
+	00N_create_tbl_test_dbdeploy.sql
+2.执行bin/upgrade-db.bat执行数据库变更到开发数据库
+3.修改/management/bin/hibernate/hibernate.reveng.xml,指定需要生成代码的表名
+4.执行/management/bin/hibernate/generate-code.bat,生成CRUD代码
+5.执行bin/tomcat.bat或者bin/jetty.bat启动web服务
+6.访问新增的页面链接:http://localhost:8888/management/admin/testUser
 
-执行bin/package.bat,测试打包是否正常,下载依赖的jar包
 
-0.启动mysql服务,修改mysql数据库root用户密码配置
-/management/src/main/resources/application.properties
-jdbc.password=你的数据库密码
-
-
+-------------------------------------------------------------------
+						细节介绍
+-------------------------------------------------------------------
 1.数据库初始化脚本:
 建schema:/management/src/main/resources/sql/mysql/create_schema.sql
 
@@ -57,7 +94,7 @@ http://static.springsource.org/autorepo/docs/spring-framework/current/spring-fra
 对数据库的修改按照如下约定:
 
 1.如果需要全部的sql,只要执行所有增量脚本,数据库里的就是最新的全部表结构
-然后用workbench导出一个表结构的sql就可以,保证只需要维护一份增量脚本
+然后用workbench导出一个表结构的sql即可,保证只需要维护一份增量脚本
 
 2.每次对数据库的变更放在文件夹:/management/src/main/resources/sql/mysql/changes/
 
@@ -98,4 +135,3 @@ http://static.springsource.org/autorepo/docs/spring-framework/current/spring-fra
 
 7.只有第一次安装系统的时候才需要执行(重要!!!)
 bin/refresh-db.bat
-

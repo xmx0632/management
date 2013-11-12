@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="dbdeploy_example" default="generate-upgrade-script">
+<project name="management_dbdeploy" default="generate-upgrade-script">
 	<property file="../../src/main/resources/application.properties"/>
 
     <property name="db.driver" value="${jdbc.driver}" />
