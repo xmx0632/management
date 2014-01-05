@@ -189,6 +189,11 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 		</dependency>
+		
+		<dependency>  
+	        <groupId>javax.jms</groupId>  
+	        <artifactId>jms</artifactId>  
+	    </dependency>
 		<!-- JMS end -->
 
 		<!-- TIMER -->
