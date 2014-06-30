@@ -74,6 +74,7 @@
 			</snapshots>
 		</repository>
 		
+		<!-- 尝试解决jms.jar下载问题 start -->
 		<repository>
 			<id>jboss</id>
 			<name>jboss Repository</name>
@@ -83,6 +84,15 @@
 			</snapshots>
 		</repository>
 		
+		<repository>
+		  	<id>repository.jboss.org-public</id>
+		  	<name>JBoss repository</name>
+		  	<url>https://repository.jboss.org/nexus/content/groups/public</url>
+		  	<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- 尝试解决jms.jar下载问题 end -->
 		
 	</repositories>
 

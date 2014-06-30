@@ -1,6 +1,6 @@
 <ehcache updateCheck="false" name="shiroCache">
 
-	<diskStore path="java.io.tmpdir/ehcache/df/shiro" />
+	<diskStore path="java.io.tmpdir/ehcache/management/shiro" />
 	
    	<defaultCache
             maxElementsInMemory="10000"
