@@ -5,6 +5,8 @@ drop table if exists df_admin_role;
 drop table if exists df_role;
 drop table if exists df_admin;
 drop table if exists df_team;
+drop table if exists df_permission;
+
 
 create table df_task (
 	id bigint auto_increment,
@@ -30,7 +32,6 @@ create table df_user (
 create table df_role (
     id bigint auto_increment,
 	name varchar(255) not null unique,
-	permissions varchar(255),
     primary key (id)
 );
 
@@ -57,6 +58,20 @@ create table df_team (
 	name varchar(255) not null unique,
 	master_id bigint,
     primary key (id)
+);
+
+create table df_permission (
+   	id bigint auto_increment,
+	name varchar(255) not null unique,
+	description varchar(255),
+	permission_string varchar(255),
+    primary key (id)
+);
+
+create table df_role_permission (
+    role_id bigint not null,
+    permission_id bigint not null,
+    primary key (role_id ,permission_id)
 );
 
 commit; 

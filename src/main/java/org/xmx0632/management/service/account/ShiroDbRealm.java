@@ -77,7 +77,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			// 基于Role的权限信息
 			info.addRole(role.getName());
 			// 基于Permission的权限信息
-			info.addStringPermissions(role.getPermissionList());
+			info.addStringPermissions(role.getPermissionStringList());
 		}
 		return info;
 	}

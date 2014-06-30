@@ -17,8 +17,8 @@ insert into df_admin (id, login_name, name, email, password, salt, status, team_
 insert into df_admin (id, login_name, name, email, password, salt, status, team_id) values(5,'user4','Sawyer','sawyer@springside.org.cn','2488aa0c31c624687bd9928e0a5d29e7d1ed520b','6d65d24122c30500','enabled',1);
 insert into df_admin (id, login_name, name, email, password, salt, status, team_id) values(6,'user5','Ben','ben@springside.org.cn','2488aa0c31c624687bd9928e0a5d29e7d1ed520b','6d65d24122c30500','enabled',1);
 
-insert into df_role (id, name, permissions) values(1,'Admin','user:view,user:edit');
-insert into df_role (id, name, permissions) values(2,'User','user:view');
+insert into df_role (id, name) values(1,'Admin');
+insert into df_role (id, name) values(2,'User');
 
 insert into df_admin_role (admin_id, role_id) values(1,1);
 insert into df_admin_role (admin_id, role_id) values(1,2);
@@ -29,5 +29,12 @@ insert into df_admin_role (admin_id, role_id) values(5,2);
 insert into df_admin_role (admin_id, role_id) values(6,2);
 
 insert into df_team (id, name, master_id) values(1,'Dolphin',1);
+
+insert into df_permission (id, name, description, permission_string) values(1,'view user','','user:view');
+insert into df_permission (id, name, description, permission_string) values(2,'edit user','','user:edit');
+
+insert into df_role_permission (role_id ,permission_id) values(1,1);
+insert into df_role_permission (role_id ,permission_id) values(1,2);
+insert into df_role_permission (role_id ,permission_id) values(2,1);
 
 commit; 
