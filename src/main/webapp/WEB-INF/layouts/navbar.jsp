@@ -43,6 +43,7 @@
 			<ul class="dropdown-menu">
 				<shiro:hasRole name="Admin">
 				<li><a href="${ctx}/account/admin"><s:message code="common.nav.adminUsers"/></a></li>
+				<li><a href="${ctx}/admin/permission">Permission维护</a></li>
 				<li><a href="${ctx}/admin/apiMonitor">API Monitor</a></li>
 				<li><a href="${ctx}/druid" target="blank">Druid Monitor</a></li>
 				<li class="divider"></li>
